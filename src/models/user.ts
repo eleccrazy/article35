@@ -1,6 +1,11 @@
 import { User } from '@prisma/client';
 import client from '../database';
 import { Role } from '@prisma/client';
+import { Blog } from '@prisma/client';
+import { Comment } from '@prisma/client';
+import { Like } from '@prisma/client';
+import { Project } from '@prisma/client';
+import { Event } from '@prisma/client';
 
 // Custome type for signup data
 export type SignUpData = {
@@ -26,6 +31,25 @@ export type UserUpdateData = {
   bio?: string;
 };
 
+// Custome type for relationship user data
+export type UserRelationship = {
+  id: string;
+  email: string;
+  firstName: string | null;
+  lastName: string | null;
+  password: string;
+  bio: string | null;
+  phone: string | null;
+  role: Role;
+  createdAt: Date;
+  updatedAt: Date;
+  blogs: Blog[];
+  comments: Comment[];
+  likes: Like[];
+  projects: Project[];
+  events: Event[];
+};
+
 // Define a class that represents a  users table in the database
 export class UserStore {
   // Get all users
@@ -41,7 +65,7 @@ export class UserStore {
   }
 
   // Get a single user by its id.
-  async getSingleUser(id: string): Promise<User | null> {
+  async getSingleUser(id: string): Promise<UserRelationship | null> {
     try {
       const user = await client.user.findUnique({
         where: { id: id },

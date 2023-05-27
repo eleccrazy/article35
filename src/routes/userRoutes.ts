@@ -71,4 +71,74 @@ userRouter.put('/:id', verifyAuthToken, async (req: Request, res: Response) => {
   }
 });
 
+// Get all blogs of a user
+userRouter.get(
+  '/:id/blogs',
+  verifyAuthToken,
+  async (req: Request, res: Response) => {
+    const user = await getUsersById(req.params.id);
+    if (user == null) {
+      res.status(404).json({ Error: 'User not found' });
+    } else {
+      res.json(user.blogs);
+    }
+  }
+);
+
+// Get all comments of a user
+userRouter.get(
+  '/:id/comments',
+  verifyAuthToken,
+  async (req: Request, res: Response) => {
+    const user = await getUsersById(req.params.id);
+    if (user == null) {
+      res.status(404).json({ Error: 'User not found' });
+    } else {
+      res.json(user.comments);
+    }
+  }
+);
+
+// Get all likes of a user
+userRouter.get(
+  '/:id/likes',
+  verifyAuthToken,
+  async (req: Request, res: Response) => {
+    const user = await getUsersById(req.params.id);
+    if (user == null) {
+      res.status(404).json({ Error: 'User not found' });
+    } else {
+      res.json(user.likes);
+    }
+  }
+);
+
+// Get all projects of a user
+userRouter.get(
+  '/:id/projects',
+  verifyAuthToken,
+  async (req: Request, res: Response) => {
+    const user = await getUsersById(req.params.id);
+    if (user == null) {
+      res.status(404).json({ Error: 'User not found' });
+    } else {
+      res.json(user.projects);
+    }
+  }
+);
+
+// Get all events of a user
+userRouter.get(
+  '/:id/events',
+  verifyAuthToken,
+  async (req: Request, res: Response) => {
+    const user = await getUsersById(req.params.id);
+    if (user == null) {
+      res.status(404).json({ Error: 'User not found' });
+    } else {
+      res.json(user.events);
+    }
+  }
+);
+
 export default userRouter;
