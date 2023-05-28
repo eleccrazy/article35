@@ -71,7 +71,7 @@ userRouter.put('/:id', verifyAuthToken, async (req: Request, res: Response) => {
   }
 });
 
-// Get all blogs of a user
+// Get all blogs of a user with /users/:id/blogs
 userRouter.get(
   '/:id/blogs',
   verifyAuthToken,
@@ -85,7 +85,7 @@ userRouter.get(
   }
 );
 
-// Get all comments of a user
+// Get all comments of a user with /users/:id/comments
 userRouter.get(
   '/:id/comments',
   verifyAuthToken,
@@ -99,7 +99,7 @@ userRouter.get(
   }
 );
 
-// Get all likes of a user
+// Get all likes of a user with /users/:id/likes
 userRouter.get(
   '/:id/likes',
   verifyAuthToken,
@@ -113,7 +113,7 @@ userRouter.get(
   }
 );
 
-// Get all projects of a user
+// Get all projects of a user with /users/:id/projects
 userRouter.get(
   '/:id/projects',
   verifyAuthToken,
@@ -127,7 +127,7 @@ userRouter.get(
   }
 );
 
-// Get all events of a user
+// Get all events of a user with /users/:id/events
 userRouter.get(
   '/:id/events',
   verifyAuthToken,
