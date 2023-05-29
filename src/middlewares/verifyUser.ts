@@ -31,9 +31,7 @@ export const verifyAdminToken = (
     if (decodedToken.role === 'ADMIN') {
       next();
     } else {
-      res
-        .status(401)
-        .json({ Error: 'Unauthorized Access, Admin previlege is required' });
+      res.status(401).json({ Error: 'Admin previlege is required' });
     }
   } catch (error) {
     res.status(401).json({ Error: 'Unauthorized Access' });
