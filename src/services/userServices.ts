@@ -72,7 +72,7 @@ export const userSignUp = async (userData: any) => {
 
     // Create a token.
     let token = jwt.sign(
-      { id: newUser.id, email: newUser.email },
+      { id: newUser.id, email: newUser.email, role: newUser.role },
       String(process.env.JWT_SECRET)
     );
     return { token: token, user: newUser };
@@ -117,7 +117,7 @@ export const userLogin = async (userData: any) => {
     } else {
       // Create a token.
       let token = jwt.sign(
-        { id: user.id, email: user.email },
+        { id: user.id, email: user.email, role: user.role },
         String(process.env.JWT_SECRET)
       );
       return { token: token, user: user };

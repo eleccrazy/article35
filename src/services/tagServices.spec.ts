@@ -7,20 +7,10 @@ import {
   getSingleTag
 } from './tagServices';
 
-// Delete all tags before all tests.
-beforeAll(async () => {
-  await deleteAllTags();
-});
-
 // Define variables for test data
 let id: string | undefined;
 
 describe('Test for tag services', () => {
-  // Delete all tags before all tests.
-  beforeAll(async () => {
-    await deleteAllTags();
-  });
-
   // Test if the getTags function returns an empty array of tags at start
   it('should return an empty array of tags at start', async () => {
     const tags = await getTags();
@@ -114,11 +104,6 @@ describe('Test for tag services', () => {
     }
   });
 
-  // Delete all tags after all tests.
-  afterAll(async () => {
-    await deleteAllTags();
-  });
-
   // Test if the deleteTag function returns an object with an Error property when necessary parameters are missed
   it('should return an object with an Error property when necessary parameters are missed', async () => {
     const result = await deleteTag('');
@@ -144,9 +129,9 @@ describe('Test for tag services', () => {
       });
     }
   });
-});
 
-// Delete all tags after all tests.
-afterAll(async () => {
-  await deleteAllTags();
+  // Delete all tags after all tests.
+  afterAll(async () => {
+    await deleteAllTags();
+  });
 });

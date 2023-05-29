@@ -9,11 +9,6 @@ import {
   updateUser
 } from './userServices';
 
-// Delete all users before each test
-beforeAll(async () => {
-  await deleteAllUsers();
-});
-
 // Define variables for test data
 let email: string | undefined;
 let id: string | undefined;
@@ -251,9 +246,4 @@ describe('Test for user services', () => {
   afterAll(async () => {
     await deleteAllUsers();
   });
-});
-
-// Delete all users after all test
-afterAll(async () => {
-  await deleteAllUsers();
 });
