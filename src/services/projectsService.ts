@@ -1,4 +1,5 @@
 import { ProjectStore, CreateProject, UpdateProject } from '../models/project';
+import { getUsersById } from './userServices';
 import { Project } from '@prisma/client';
 
 // Create a new instance of the ProjectStore class.
@@ -31,7 +32,7 @@ export const createProject = async (projectData: CreateProject) => {
       !projectData.userId
     ) {
       return {
-        Error: 'title, description, image, and links must be provided'
+        Error: 'title, content, signatures, and userId must be provided'
       };
     }
     // Check the length of the title.
@@ -46,7 +47,12 @@ export const createProject = async (projectData: CreateProject) => {
     if (!Array.isArray(projectData.signatures)) {
       return { Error: 'signatures must be an array of type string' };
     }
-    // Check if user with authorId exists
+    // Check if user with userId exists
+    const user = await getUsersById(projectData.userId);
+    if (user === null) {
+      return { Error: 'userId must be an existing user' };
+    }
+    // Create a new project
     const project = await projectStore.createProject(projectData);
     return { project: project };
   } catch (error) {

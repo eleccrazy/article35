@@ -18,7 +18,7 @@ import { createTag, deleteAllTags } from './tagServices';
 
 let blogId: string | undefined;
 
-describe('Test for blog services', () => {
+describe('Test suite for blog services', () => {
   // Test if the getBlogs function returns an empty array of blogs at start
   it('should return an empty array of blogs at start', async () => {
     const blogs = await getBlogs();

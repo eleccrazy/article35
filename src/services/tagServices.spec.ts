@@ -10,7 +10,7 @@ import {
 // Define variables for test data
 let id: string | undefined;
 
-describe('Test for tag services', () => {
+describe('Test suite for tag services', () => {
   // Test if the getTags function returns an empty array of tags at start
   it('should return an empty array of tags at start', async () => {
     const tags = await getTags();

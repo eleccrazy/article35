@@ -13,7 +13,7 @@ import {
 let email: string | undefined;
 let id: string | undefined;
 
-describe('Test for user services', () => {
+describe('Test suite for user services', () => {
   // Delete all users before all test
   beforeAll(async () => {
     await deleteAllUsers();
