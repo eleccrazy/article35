@@ -96,9 +96,9 @@ export const updateProject = async (id: string, projectData: UpdateProject) => {
 // Delete all projects
 export const deleteAllProjects = async () => {
   try {
-    // Get all blogs first
+    // Get all projects first
     const projects = await projectStore.getProjects();
-    // Delete all blogs
+    // Delete all events
     for (const project of projects) {
       await projectStore.deleteProject(project.id);
     }
