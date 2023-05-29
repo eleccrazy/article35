@@ -17,7 +17,7 @@ export type BlogUpdateData = {
   summary?: string;
   content?: string;
   image?: string | null;
-  link?: string;
+  links?: string;
   isApproved?: boolean;
   updatedAt?: Date;
 };

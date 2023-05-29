@@ -155,9 +155,7 @@ describe('Test for blog services', () => {
     const result = await updateBlog('test', {
       title: 'New test title'
     });
-    expect(result).toEqual({
-      Error: 'Blog with that id does not exist'
-    });
+    expect(result).toBeNull();
   });
 
   // Test if the updateBlog function returns an object with an Error property when a blog with invalid title length is provided
