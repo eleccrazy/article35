@@ -50,6 +50,10 @@ export const createEvent = async (eventData: CreateEvent) => {
     if (eventData.description.length < 100) {
       return { Error: 'description must be at least 100 characters long' };
     }
+    // Check due_date if it is a valid date
+    if (isNaN(Date.parse(String(eventData.due_date)))) {
+      return { Error: 'due_date must be a valid date' };
+    }
     // Check if user with userId exists
     const user = await getUsersById(eventData.userId);
     if (user === null) {
@@ -76,6 +80,11 @@ export const deleteEvent = async (id: string) => {
 // Update an event
 export const updateEvent = async (id: string, eventData: UpdateEvent) => {
   try {
+    // Check if the event with the provided id exists
+    const eventCheck = await eventStore.getSingleEvent(id);
+    if (eventCheck === null) {
+      return null;
+    }
     // Check the length of the title.
     if (eventData.title && eventData.title.length < 3) {
       return { Error: 'title must be at least 3 characters long' };
@@ -93,7 +102,7 @@ export const updateEvent = async (id: string, eventData: UpdateEvent) => {
 };
 
 // Delete all events
-export const deleteAllProjects = async () => {
+export const deleteAllEvents = async () => {
   try {
     // Get all events first
     const events = await eventStore.getEvents();
