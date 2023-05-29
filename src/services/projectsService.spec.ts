@@ -9,7 +9,7 @@ import {
 } from './projectsService';
 import { deleteAllUsers, userSignUp } from './userServices';
 
-describe('Test suite for projects Service', () => {
+describe('Test suite for project Service', () => {
   // Delete all projects before all test
   beforeAll(async () => {
     await deleteAllProjects();
@@ -30,7 +30,7 @@ describe('Test suite for projects Service', () => {
       userId: ''
     });
     expect(result).toEqual({
-      Error: 'title, content, signatures, and userId must be provided'
+      Error: 'title, content, and userId must be provided'
     });
   });
 

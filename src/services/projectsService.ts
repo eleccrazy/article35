@@ -32,7 +32,7 @@ export const createProject = async (projectData: CreateProject) => {
       !projectData.userId
     ) {
       return {
-        Error: 'title, content, signatures, and userId must be provided'
+        Error: 'title, content, and userId must be provided'
       };
     }
     // Check the length of the title.
@@ -42,10 +42,6 @@ export const createProject = async (projectData: CreateProject) => {
     // Check the length of the description.
     if (projectData.content.length < 100) {
       return { Error: 'content must be at least 100 characters long' };
-    }
-    // Check that links must be an array of type string.
-    if (!Array.isArray(projectData.signatures)) {
-      return { Error: 'signatures must be an array of type string' };
     }
     // Check if user with userId exists
     const user = await getUsersById(projectData.userId);
