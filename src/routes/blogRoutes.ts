@@ -54,7 +54,7 @@ blogRouter.post('/', verifyAuthToken, async (req: Request, res: Response) => {
     if (blog.Error) {
       res.status(400).json(blog);
     } else {
-      res.json(blog.blog);
+      res.status(201).json(blog.blog);
     }
   } catch (error) {
     res.status(500).send(`Could not create blog. Error: ${error}`);

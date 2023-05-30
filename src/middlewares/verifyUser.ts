@@ -27,7 +27,6 @@ export const verifyAdminToken = (
     const authorizationHeader = String(req.headers.authorization);
     const token = authorizationHeader.split(' ')[1];
     const decodedToken: any = jwt.verify(token, String(process.env.JWT_SECRET));
-    console.log(decodedToken);
     if (decodedToken.role === 'ADMIN') {
       next();
     } else {
