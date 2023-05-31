@@ -58,12 +58,12 @@ export default class CommentStore {
   // Update a comment
   async updateComment(
     id: string,
-    commentData: Comment
+    commentData: string
   ): Promise<Comment | null> {
     try {
       const comment = await client.comment.update({
         where: { id: id },
-        data: commentData
+        data: { content: commentData }
       });
       return comment;
     } catch (error) {
