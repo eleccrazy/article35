@@ -8,7 +8,7 @@ export type CreateLike = {
 };
 
 // Define a class that represents a like table
-export default class LikeStore {
+export class LikeStore {
   // Create a like in the database
   async createLike(likeData: CreateLike): Promise<Like> {
     try {
@@ -32,6 +32,32 @@ export default class LikeStore {
       return like;
     } catch (error) {
       throw new Error(`Could not delete like ${id}. Error: ${error}`);
+    } finally {
+      await client.$disconnect();
+    }
+  }
+
+  // Get a single like from the database based on its id
+  async getSingleLike(id: string): Promise<Like | null> {
+    try {
+      const like: Like | null = await client.like.findUnique({
+        where: { id: id }
+      });
+      return like;
+    } catch (error) {
+      throw new Error(`Could not find like ${id}. Error: ${error}`);
+    } finally {
+      await client.$disconnect();
+    }
+  }
+
+  // Get all likes from the database
+  async getAllLikes(): Promise<Like[]> {
+    try {
+      const likes: Like[] = await client.like.findMany();
+      return likes;
+    } catch (error) {
+      throw new Error(`Could not get likes. Error: ${error}`);
     } finally {
       await client.$disconnect();
     }
