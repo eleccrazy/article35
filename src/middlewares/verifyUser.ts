@@ -36,3 +36,9 @@ export const verifyAdminToken = (
     res.status(401).json({ Error: 'Unauthorized Access' });
   }
 };
+
+// Get id from the token
+export const getUserIdFromToken = (token: string) => {
+  const decodedToken: any = jwt.verify(token, String(process.env.JWT_SECRET));
+  return decodedToken.id;
+};
