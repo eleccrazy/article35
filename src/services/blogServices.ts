@@ -31,12 +31,10 @@ export const createBlog = async (blogData: BlogData) => {
       !blogData.content ||
       !blogData.authorId ||
       !blogData.summary ||
-      !blogData.image ||
       !blogData.links
     ) {
       return {
-        Error:
-          'title, content, authorId, summary, image, and links must be provided'
+        Error: 'title, content, authorId, summary, and links must be provided'
       };
     }
     // Check the length of the title.

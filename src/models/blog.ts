@@ -6,7 +6,7 @@ export type BlogData = {
   title: string;
   summary: string;
   content: string;
-  image: string | null;
+  image?: string | null;
   links: string[];
   authorId: string;
 };
