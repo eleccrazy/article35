@@ -45,6 +45,7 @@ tagRouter.post(
 tagRouter.delete(
   '/:id',
   verifyAuthToken,
+  verifyAdminToken,
   async (req: Request, res: Response) => {
     const result = await deleteTag(req.params.id);
     res.json(result);
@@ -52,15 +53,20 @@ tagRouter.delete(
 );
 
 // Handle PUT request for /tags/:id
-tagRouter.put('/:id', verifyAuthToken, async (req: Request, res: Response) => {
-  const tagNmame = req.body.name;
-  const result = await createTag(tagNmame);
-  if (result.Error) {
-    res.status(400).json(result);
-  } else {
-    res.status(201).json(result.tag);
+tagRouter.put(
+  '/:id',
+  verifyAuthToken,
+  verifyAdminToken,
+  async (req: Request, res: Response) => {
+    const tagNmame = req.body.name;
+    const result = await createTag(tagNmame);
+    if (result.Error) {
+      res.status(400).json(result);
+    } else {
+      res.status(201).json(result.tag);
+    }
   }
-});
+);
 
 // Export the router
 export default tagRouter;
