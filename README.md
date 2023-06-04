@@ -2,7 +2,7 @@
 
 ## Description
 
-This is the backend application for the Article35 project. Aritcle35 is a blog site for advocating for women's empowerment in Ethiopia. Article 35 is where the rights of women is stated in the Ethiopian constitution.
+This is the backend application for the Article35 project. Aritcle35 is a blog site for advocating women's empowerment in Ethiopia. Article 35 is where the rights of women is stated in the Ethiopian constitution.
 
 ## Technologies
 
