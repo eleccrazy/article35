@@ -1,5 +1,5 @@
 import { Router, Response, Request } from 'express';
-import { verifyAuthToken } from '../middlewares/verifyUser';
+import { verifyAdminToken, verifyAuthToken } from '../middlewares/verifyUser';
 import {
   getUsers,
   getUsersById,
@@ -14,9 +14,14 @@ import { SignUpData, LoginData, UserUpdateData } from '../models/user';
 const userRouter = Router();
 
 // Handle GET request for /users
-userRouter.get('/', verifyAuthToken, async (req: Request, res: Response) => {
-  res.send(await getUsers());
-});
+userRouter.get(
+  '/',
+  verifyAuthToken,
+  verifyAdminToken,
+  async (req: Request, res: Response) => {
+    res.send(await getUsers());
+  }
+);
 
 // Handle GET request for /users/:id
 userRouter.get('/:id', verifyAuthToken, async (req: Request, res: Response) => {
@@ -137,6 +142,44 @@ userRouter.get(
       res.status(404).json({ Error: 'User not found' });
     } else {
       res.json(user.events);
+    }
+  }
+);
+
+// Promote the user to admin with /users/:id/promote
+userRouter.put(
+  '/:id/promote',
+  verifyAuthToken,
+  verifyAdminToken,
+  async (req: Request, res: Response) => {
+    try {
+      const result = await updateUser(req.params.id, { role: 'ADMIN' });
+      if (result === null) {
+        res.status(404).json({ Error: 'User not found' });
+      } else {
+        res.status(200).json(result);
+      }
+    } catch (error) {
+      res.status(500).json({ Error: error });
+    }
+  }
+);
+
+// Demote the user to user with /users/:id/demote
+userRouter.put(
+  '/:id/demote',
+  verifyAuthToken,
+  verifyAdminToken,
+  async (req: Request, res: Response) => {
+    try {
+      const result = await updateUser(req.params.id, { role: 'USER' });
+      if (result === null) {
+        res.status(404).json({ Error: 'User not found' });
+      } else {
+        res.status(200).json(result);
+      }
+    } catch (error) {
+      res.status(500).json({ Error: error });
     }
   }
 );
