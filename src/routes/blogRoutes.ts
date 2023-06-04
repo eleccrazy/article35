@@ -20,14 +20,19 @@ import { verifyAuthToken, verifyAdminToken } from '../middlewares/verifyUser';
 const blogRouter = Router();
 
 // Handle GET request for /blogs route
-blogRouter.get('/', async (req: Request, res: Response) => {
-  try {
-    const blogs = await getBlogs();
-    res.json(blogs);
-  } catch (error) {
-    res.status(500).send(`Could not get blogs. Error: ${error}`);
+blogRouter.get(
+  '/',
+  verifyAuthToken,
+  verifyAdminToken,
+  async (req: Request, res: Response) => {
+    try {
+      const blogs = await getBlogs();
+      res.json(blogs);
+    } catch (error) {
+      res.status(500).send(`Could not get blogs. Error: ${error}`);
+    }
   }
-});
+);
 
 // Handle GET request for /blogs/:id route
 blogRouter.get('/:id', async (req: Request, res: Response) => {
@@ -171,14 +176,19 @@ blogRouter.get('/get-all/approved', async (req: Request, res: Response) => {
 });
 
 // Handle GET request for /blogs/get-all/unapproved route
-blogRouter.get('/get-all/unapproved', async (req: Request, res: Response) => {
-  try {
-    const blogs = await getUnapprovedBlogs();
-    res.json(blogs);
-  } catch (error) {
-    res.status(500).send(`Could not get unapproved blogs. Error: ${error}`);
+blogRouter.get(
+  '/get-all/unapproved',
+  verifyAuthToken,
+  verifyAdminToken,
+  async (req: Request, res: Response) => {
+    try {
+      const blogs = await getUnapprovedBlogs();
+      res.json(blogs);
+    } catch (error) {
+      res.status(500).send(`Could not get unapproved blogs. Error: ${error}`);
+    }
   }
-});
+);
 
 // Handle PUT request for /blogs/:id/approve route
 blogRouter.put(
