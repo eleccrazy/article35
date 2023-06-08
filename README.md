@@ -39,25 +39,19 @@ SALT_ROUNDS=10
 JWT_SECRET=secret-for-jsonwebtoken
 ```
 
-4. Create a docker container for the database. If you want to run the database on your local machine, you can skip step 4 and 5. Make sure to change the DATABASE_URL environment variable in the .env file to match your local database url.
-
-```
-docker run --name article35 -e POSTGRES_PASSWORD=prisma -p 5433:5432 -d postgres
-```
-
-5. Start the docker container
+4. Create a docker container for the database and start it. If you want to run the database on your local machine, you can skip step 4 and 5. Make sure to change the DATABASE_URL environment variable in the .env file to match your local database url.
 
 ```
 docker compose up -d
 ```
 
-6. Migrate the database
+5. Migrate the database
 
 ```
 npx prisma migrate dev --name init
 ```
 
-7. Run the application
+6. Run the application
 
 - Test mode
 
