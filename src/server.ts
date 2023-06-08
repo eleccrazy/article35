@@ -1,8 +1,12 @@
 import express, { Request, Response } from 'express';
 import indexRouter from './routes/indexRoutes';
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
+
+// Allow all CORS requests.
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
